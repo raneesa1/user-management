@@ -130,8 +130,8 @@ const editProfile = async (req, res) => {
         }
 
         if (profileImage) {
-            user.profileImage = profileImage.path;
-            console.log('will update the image edit later');
+            user.profileImage = `http://localhost:3000/profileimages/${req.file.filename}`
+            console.log(user.profileImage,"profile image of user")
         }
          const saved = await user.save();
         console.log('saved', saved)

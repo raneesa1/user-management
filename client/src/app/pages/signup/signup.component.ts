@@ -38,9 +38,12 @@ authService=inject(AuthServiceService)
 
 
 ngOnInit(){
-    if(this.authService.isLogged){
+   if(this.authService.isUser){
       this.router.navigateByUrl('/profile')
 
+    }
+    if(this.authService.isAdmin) {
+      this.router.navigateByUrl('/admin')
     }
   }
  signupForm = this.builder.group({

@@ -32,6 +32,7 @@ app.use(express.json())
 app.set('views', path.join(__dirname, 'views'));
 
 app.use(express.static('public'))
+app.use("/profileimages", express.static('public/photos'))
 
 app.use('/', userRouter)
 app.use('/admin', adminRouter)
