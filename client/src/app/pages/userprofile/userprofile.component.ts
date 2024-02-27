@@ -47,12 +47,6 @@ getUserDetails(): void {
     this.router.navigate(['login'])
 
   }
-  selectedFile!: File;
-
-  onFileSelected(event: any) {
-    this.selectedFile = event.target.files[0];
-    console.log('Selected file:', this.selectedFile); 
-  }
 
   editProfile(userId:string):void{
   console.log(userId)

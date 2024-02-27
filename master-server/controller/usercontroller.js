@@ -1,7 +1,8 @@
-const { emit } = require('process');
+
 const jwt = require('jsonwebtoken');
 const User = require('../model/user')
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
+
 
 
 const signup = async (req, res) => {
@@ -78,7 +79,7 @@ const login = async (req, res) => {
                 { expiresIn: '1h' })
             console.log(accessToken)
             const role = existingUser.role;
-            console.log(role,"role from login server side")
+            console.log(role, "role from login server side")
             res.status(200).json({ accessToken, role, message: "Login successful" });
             console.log('login success')
             console.log('inside the if condition of token / password matched')
@@ -112,10 +113,30 @@ const getProfile = async (req, res) => {
 const editProfile = async (req, res) => {
     try {
 
-         const { image, name } = req.body
+        const userId = req.params.id.replace(':', '');
+        console.log(userId, "consoling the user id")
+        const {name } = req.body
+        const profileImage = req.file;
+        console.log(profileImage,"conosling the path of profile image")
 
-        console.log(image, name, "consoleing the image and name edited by the user")
 
+        const user = await User.findById(userId);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+        if (name) {
+            user.name = name;
+        }
+
+        if (profileImage) {
+            user.profileImage = profileImage.path;
+            console.log('will update the image edit later');
+        }
+         const saved = await user.save();
+        console.log('saved', saved)
+
+        res.status(200).json({ message: 'User profile updated successfully' });
 
     } catch (error) {
         console.log(error, "error from edit profile")

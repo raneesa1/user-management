@@ -70,5 +70,22 @@ export class AuthServiceService {
     return false
    }
 
+   get isUser(){
+  const token = this.getToken();
+  const userRole = this.getUserRole(token);
+  if(userRole === 'user'){
+    return true
+  }
+  return false
+}
+get isAdmin(){
+  const token = this.getToken();
+  const userRole = this.getUserRole(token);
+  if(userRole === 'admin'){
+    return true
+  }
+  return false
+}
+
 
 }

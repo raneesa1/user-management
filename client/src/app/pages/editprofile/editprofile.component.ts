@@ -26,7 +26,9 @@ export class EditprofileComponent {
     private http: HttpService,
     private store: Store,
     private authService: AuthServiceService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private router : Router
+
   ) {
     this.editProfileForm = this.formBuilder.group({
       name: ['', Validators.required],
@@ -47,22 +49,27 @@ export class EditprofileComponent {
   initializeForm(userData: any): void {
     this.editedUser = { ...userData };
     this.editProfileForm.patchValue({
-      name: userData.name
+      name: userData.name,
     });
   }
 
   saveChanges(): void {
-  if (this.editProfileForm.valid) {
-    const editedUserData = this.editProfileForm.value;
-    console.log(editedUserData,"consoling the edited profile data before sending the req")
-    this.store.dispatch(editProfile({ userId: this.userId, profileData: editedUserData }));
-  } else {
-    console.log('Form is invalid');
-  }
-}
+    if (this.editProfileForm.valid) {
+      const editedUserData = this.editProfileForm.value;
+      const formData = new FormData();
+      formData.append('name', editedUserData.name);
+      formData.append('profileImage', this.editProfileForm.get('profileImage')?.value);
 
+      console.log(editedUserData, "consoling the edited profile data before sending the req");
+      this.store.dispatch(editProfile({ userId: this.userId, profileData: formData }));
+      this.router.navigate(['profile']);
+    } else {
+      console.log('Form is invalid');
+    }
+  }
 
   onFileSelected(event: any): void {
     const file: File = event.target.files[0];
+    this.editProfileForm.patchValue({ profileImage: file });
   }
 }

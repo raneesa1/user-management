@@ -6,12 +6,12 @@
     <div class="flex justify-center">
       <img
         class="h-20 w-20 rounded-full"
-        src="https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
         alt="Profile Picture"
       />
     </div>
 
-    <form [formGroup]="editProfileForm" (submit)="saveChanges()">
+    <form action="/editprofile/{{ userId }}" [formGroup]="editProfileForm" (submit)="saveChanges()" enctype="multipart/form-data"  method="POST">
       <div class="text-center mt-4 m-5">
         <h1 class="text-2xl font-bold">Edit Profile</h1>
       </div>
@@ -21,6 +21,7 @@
         <input
           id="name"
           type="text"
+          name="name"
           class="text-gray-700"
           formControlName="name"
         />
@@ -31,6 +32,7 @@
         <input
           id="profileImage"
           type="file"
+          name="profileImage"
           accept="image/*"
           (change)="onFileSelected($event)"
           formControlName="profileImage"

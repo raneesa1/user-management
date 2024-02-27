@@ -4,6 +4,7 @@ const userController = require('../controller/usercontroller');
 const authenticateUser = require('../middleware/jwt');
 const multer = require('multer')
 
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
 
@@ -15,12 +16,14 @@ const storage = multer.diskStorage({
     },
 })
 const uploadprofile = multer({ storage: storage });
+router.post('/editprofile/:id', uploadprofile.single('profileImage'), userController.editProfile)
+
+
 
 router.post('/signup', userController.signup);
 router.post('/login', userController.login);
 router.post('/profile', userController.editProfile);
 router.get('/user/:id', authenticateUser, userController.getProfile);
-router.post('/editprofile/:id', uploadprofile.single('profileImage'), userController.editProfile)
 
 
 module.exports = router;

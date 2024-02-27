@@ -1,12 +1,12 @@
 <div
   class="bg-gray-100 min-h-screen flex justify-center items-center body-design"
 >
+  @if(user){
   <div class="bg-white p-6 rounded-lg shadow-md min-w-80 min-h-96">
     <div class="flex justify-center">
       <img
         class="h-20 w-20 rounded-full"
-        src="https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200
-"
+        [src]="user.profileImage"
         alt="Profile Picture"
       />
     </div>
@@ -14,7 +14,7 @@
   <input type="file" accept="image/*" (change)="onFileSelected($event)" name="profileImage"  />
   <button type="submit" class="bg-black text-cyan-50">Upload Profile Image</button>
 </form> -->
-    @if(user){
+  
     <div class="text-center mt-4">
       <h1 class="text-2xl font-bold">{{ user.name }}</h1>
       <!-- <p class="text-gray-500">Web Developer</p> -->
@@ -32,7 +32,7 @@
         </li>
       </ul>
     </div>
-    }
+    
     <div class="mt-12 justify-center flex gap-3">
       <p
         class="bg-black hover:to-gray-600 text-white font-semibold py-2 px-4 rounded-full"
@@ -48,4 +48,5 @@
       </button>
     </div>
   </div>
+}
 </div>

@@ -7,6 +7,7 @@ import { AdduserComponent } from './pages/adduser/adduser.component';
 import { EdituserComponent } from './pages/edituser/edituser.component';
 import { loginGuard } from './routeguard/login.guard';
 import { EditprofileComponent } from './pages/editprofile/editprofile.component';
+import { roleGuard } from './routeguard/role.guard';
 
 export const routes: Routes = [
 
@@ -17,13 +18,13 @@ export const routes: Routes = [
     {
         path: 'profile', component: UserprofileComponent,canActivate:[loginGuard]
     },
-    {   path: 'admin', component: AdminComponent,canActivate:[loginGuard]
+    {   path: 'admin', component: AdminComponent,canActivate:[roleGuard]
     },
     {
-        path:'adduser' , component :AdduserComponent,canActivate:[loginGuard]
+        path:'adduser' , component :AdduserComponent,canActivate:[roleGuard]
     },
     {
-        path:'edituser/:id',component : EdituserComponent,canActivate:[loginGuard]
+        path:'edituser/:id',component : EdituserComponent,canActivate:[roleGuard]
     },
     {
         path:'editprofile/:id',component:EditprofileComponent,canActivate:[loginGuard]
