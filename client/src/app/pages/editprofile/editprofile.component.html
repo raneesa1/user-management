@@ -1,0 +1,51 @@
+<div
+  class="bg-gray-100 min-h-screen flex justify-center items-center body-design"
+>
+  <div class="bg-white p-6 rounded-lg shadow-md min-w-80 min-h-96">
+    @if(user){
+    <div class="flex justify-center">
+      <img
+        class="h-20 w-20 rounded-full"
+        src="https://gravatar.com/avatar/205e460b479e2e5b48aec07710c08d50?s=200"
+        alt="Profile Picture"
+      />
+    </div>
+
+    <form [formGroup]="editProfileForm" (submit)="saveChanges()">
+      <div class="text-center mt-4 m-5">
+        <h1 class="text-2xl font-bold">Edit Profile</h1>
+      </div>
+
+      <div class="mt-6">
+        <label for="name">Name:</label>
+        <input
+          id="name"
+          type="text"
+          class="text-gray-700"
+          formControlName="name"
+        />
+      </div>
+
+      <div class="mt-6">
+        <label for="profileImage">Profile Image: </label>
+        <input
+          id="profileImage"
+          type="file"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+          formControlName="profileImage"
+        />
+      </div>
+
+      <div class="mt-12 justify-center flex gap-3">
+        <button
+          type="submit"
+          class="bg-black text-white rounded-md items-center pt-1 pl-4 pr-4 pb-1 bg-center"
+        >
+          Save Changes
+        </button>
+      </div>
+    </form>
+    }
+  </div>
+</div>

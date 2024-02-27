@@ -1,0 +1,71 @@
+<div class="flex h-screen">
+  <div class="bg-gray-900 text-white w-64 flex flex-col">
+    <div class="p-4">
+      <span class="text-xl font-semibold">Admin Panel</span>
+    </div>
+    <nav class="flex-1">
+      <p class="block py-2 px-4 hover:bg-gray-700">Users</p>
+      <p class="block py-2 px-4 hover:bg-gray-700">Logout</p>
+    </nav>
+  </div>
+  <div class="flex-1">
+    <nav
+      class="bg-gray-200 text-black py-4 px-6 flex justify-between items-center"
+    >
+      <span class="text-2xl font-semibold">User Management</span>
+      <!-- <div>
+        <a href="#" class="inline-block py-2 px-4 hover:bg-gray-400">Profile</a>
+        <a href="#" class="inline-block py-2 px-4 hover:bg-gray-400"
+          >Settings</a
+        >
+        <a href="#" class="inline-block py-2 px-4 hover:bg-gray-400">Logout</a>
+      </div> -->
+    </nav>
+
+    <div class="p-6">
+      <div class="flex justify-between items-center mb-4">
+        <h1 class="text-2xl font-semibold">Users</h1>
+        <p
+          class="bg-black hover:bg-gray-400 text-white font-semibold py-2 px-4 rounded-full"
+          [routerLink]="'/adduser'"
+        >
+          Add User
+        </p>
+      </div>
+      @if(users){
+      <table class="w-full border-collapse border border-gray-300">
+        <thead>
+          <tr>
+            <th class="py-2 px-4 bg-gray-200 text-gray-700">Name</th>
+            <th class="py-2 px-4 bg-gray-200 text-gray-700">Email</th>
+            <th class="py-2 px-4 bg-gray-200 text-gray-700">Actions</th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+          @for(user of users;track user){
+          <tr>
+            <td class="py-2 px-4">{{ user.name }}</td>
+            <td class="py-2 px-4">{{ user.email }}</td>
+            <td class="py-2 px-4">
+              <button
+                class="bg-green-500 hover:bg-green-600 text-white font-semibold py-1 px-2 rounded-full mr-2"
+                (click)="editUser(user._id)"
+                
+                >
+                Edit
+              </button>
+              <button
+                class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-2 rounded-full"
+                (click)="confirmDelete(user._id)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+          }
+        </tbody>
+      </table>
+      }
+    </div>
+  </div>
+</div>
